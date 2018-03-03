@@ -1,4 +1,6 @@
 // This module is used to interact with the Zomato api
+//
+import { Coordinates } from '../types';
 
 // Move to Env
 const apiKey: string = '129bc0569dfc22502d379d7881792082';
@@ -13,7 +15,7 @@ const zomatoRequestOtps = {
 };
 
 // Get all entries near to a location
-export function getNearby(geoLocation = {}) {
+export function getNearby(geoLocation: Coordinates) {
   const {latitude = 53.35, longitude = -6.27} = geoLocation;
   const url = `${zomatoUrl}/geocode?lat=${latitude}&lon=${longitude}`;
   return fetch(url, zomatoRequestOtps);

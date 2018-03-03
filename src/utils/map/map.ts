@@ -1,6 +1,7 @@
 // This module manages all functionality on maps
 import L from 'leaflet';
 import { getNearby } from '../zomato/zomato';
+import { Coordinates } from '../types';
 
 // move to env when this is fixed https://github.com/glimmerjs/glimmer-application-pipeline/issues/89
 const Env = {
