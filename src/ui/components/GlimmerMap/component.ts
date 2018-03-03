@@ -32,8 +32,18 @@ export default class GlimmerMap extends Component {
       const p: Position = await getUserLocation();
       setUserLocation(this.state, p.coords);
       populateNearby(this.state, p.coords);
+      this.watchUserLocation();
     } catch (e) {
+      console.log('error ', e);
       // Couldn't get the users current location
     }
+  }
+
+  watchUserLocation () {
+    const state = this.state;
+    state.map.addEventListener('moveend', () => {
+      const { lat, lng } = state.map.getCenter();
+      populateNearby(state, {latitude: lat, longitude: lng});
+    });
   }
 }
