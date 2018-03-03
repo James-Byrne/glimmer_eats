@@ -14,6 +14,6 @@ app.registerInitializer({
   }
 });
 
-app.renderComponent('DublinBus', containerElement, null);
+app.renderComponent('GlimmerEats', containerElement, null);
 
 app.boot();
