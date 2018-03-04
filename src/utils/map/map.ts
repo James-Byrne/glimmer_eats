@@ -24,18 +24,14 @@ export function renderMap (state): void {
 }
 
 export async function populateNearby (state, coords: Coordinates) {
-  try {
-    const result = await getNearby(coords);
-    const { nearby_restaurants } = await result.json();
+  const result = await getNearby(coords);
+  const { nearby_restaurants } = await result.json();
 
-    if (nearby_restaurants.length > 0) {
-      nearby_restaurants.forEach(r => addRestaurant(state, r.restaurant));
-    } else {
-      // inform the user no restaurants are nearby
-      console.log('Error, no restaurants nearby');
-    }
-  } catch (e) {
-    console.log(e);
+  if (nearby_restaurants.length > 0) {
+    nearby_restaurants.forEach(r => addRestaurant(state, r.restaurant));
+  } else {
+    // inform the user no restaurants are nearby
+    console.log('Error, no restaurants nearby');
   }
 }
 
