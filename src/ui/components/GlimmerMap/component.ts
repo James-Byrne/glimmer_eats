@@ -12,6 +12,7 @@ export default class GlimmerMap extends Component {
     maxZoom: 17,
     startingZoom: 14,
     restaurantList: [],
+    selected: {},
   }
 
   get element(): HTMLElement {

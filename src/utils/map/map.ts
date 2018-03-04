@@ -10,17 +10,19 @@ const Env = {
   leafletUrl: 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
 };
 
+// Create a map instance on the state object passed in
 export function createMap(state, element: Element): void {
   state.map = L.map(element).setView([state.latitude, state.longitude], state.startingZoom);
 }
 
-export function renderMap (state): void {
+// Render a map given a map object
+export function renderMap ({ maxZoom, map }): void {
   L.tileLayer(Env.leafletUrl, {
     attribution: Env.attribution,
-    maxZoom: state.maxZoom,
+    maxZoom: maxZoom,
     id: 'mapbox.streets',
     accessToken: Env.accessToken
-  }).addTo(state.map);
+  }).addTo(map);
 }
 
 export async function populateNearby (state, coords: Coordinates) {
@@ -35,10 +37,14 @@ export async function populateNearby (state, coords: Coordinates) {
   }
 }
 
-export function addRestaurant ({map, restaurantList}, restaurant): void {
+// This function takes care of adding a restaurant to a map,
+// creating a popover and onClick event for the marker
+function addRestaurant ({map, restaurantList, selected}, restaurant): void {
   if (!restaurantList.includes(restaurant.R.res_id)) {
     restaurantList.push(restaurant.R.res_id);
-    const {location: { latitude, longitude }} = restaurant;
-    L.marker([latitude, longitude]).addTo(map);
+    const { location: { latitude, longitude } } = restaurant;
+    L.marker([latitude, longitude])
+      .on('click', () => { console.log(selected);selected = restaurant})
+      .addTo(map)
   }
 }
