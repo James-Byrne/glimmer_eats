@@ -34,10 +34,15 @@ export async function populateNearby (state, coords: Coordinates) {
       // inform the user no restaurants are nearby
       console.log('Error, no restaurants nearby');
     }
-  } catch (e) { }
+  } catch (e) {
+    console.log(e);
+  }
 }
 
-export function addRestaurant (state, restaurant): void {
-  const {location: { latitude, longitude }} = restaurant;
-  L.marker([latitude, longitude]).addTo(state.map);
+export function addRestaurant ({map, restaurantList}, restaurant): void {
+  if (!restaurantList.includes(restaurant.R.res_id)) {
+    restaurantList.push(restaurant.R.res_id);
+    const {location: { latitude, longitude }} = restaurant;
+    L.marker([latitude, longitude]).addTo(map);
+  }
 }

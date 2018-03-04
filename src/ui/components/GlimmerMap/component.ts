@@ -10,7 +10,8 @@ export default class GlimmerMap extends Component {
     longitude: -6.27,
     latitude: 53.35,
     maxZoom: 17,
-    startingZoom: 15,
+    startingZoom: 14,
+    restaurantList: [],
   }
 
   get element(): HTMLElement {
