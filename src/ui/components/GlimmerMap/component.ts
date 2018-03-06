@@ -5,14 +5,20 @@ import { createMap, renderMap, populateNearby } from '../../../utils/map/map';
 import { getUserLocation, setUserLocation } from '../../../utils/location/location';
 
 export default class GlimmerMap extends Component {
-  state: any = {
+  @tracked state: any = {
     map: {},
     longitude: -6.27,
     latitude: 53.35,
     maxZoom: 17,
     startingZoom: 14,
     restaurantList: [],
-    selected: {},
+    restaurant: {},
+    onSelect: restaurant => this.state = { ...this.state, restaurant }
+  }
+
+  @tracked('state')
+  get selectedRestaurant() {
+    return this.state.restaurant;
   }
 
   get element(): HTMLElement {

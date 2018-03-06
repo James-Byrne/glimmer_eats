@@ -39,12 +39,10 @@ export async function populateNearby (state, coords: Coordinates) {
 
 // This function takes care of adding a restaurant to a map,
 // creating a popover and onClick event for the marker
-function addRestaurant ({map, restaurantList, selected}, restaurant): void {
+function addRestaurant ({ map, restaurantList, onSelect }, restaurant): void {
   if (!restaurantList.includes(restaurant.R.res_id)) {
     restaurantList.push(restaurant.R.res_id);
     const { location: { latitude, longitude } } = restaurant;
-    L.marker([latitude, longitude])
-      .on('click', () => { console.log(selected);selected = restaurant})
-      .addTo(map)
+    L.marker([latitude, longitude]).on('click', () => onSelect(restaurant)).addTo(map);
   }
 }
