@@ -1,6 +1,24 @@
-#app > div, .glimmer-map { height: 100vh; }
-
-#map {
+/* GlimmerMap Component */
+.glimmer-map { height: 100vh; }
+.glimmer-map > #map {
   height: 100%;
   width: 100%;
 }
+
+/* RestaurantPreview Component */
+.restaurant-preview {
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+
+  width: 100%;
+
+  background-color: white;
+}
+.preview-thumbnail {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+}
+.preview-content { padding: 10px; }
+.ratings > .fa-star { color: yellow; }
