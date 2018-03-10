@@ -1,3 +1,28 @@
-<div id="#restaurant-preview">
-  {{@restaurant.name}}
-</div>
+{{#if @restaurant.name}}
+  <div id="#restaurant-preview" class="restaurant-preview">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-4 preview-thumbnail"
+          style="background-image: url({{@restaurant.thumb}})">
+        </div>
+
+        <div class="col">
+          <div class="preview-content">
+            <h4 class="title">{{@restaurant.name}}</h4>
+
+            <p class="ratings">
+              <i class="fas fa-star"></i>
+              <span style="color: #{{@restaurant.user_rating.rating_color}}">
+                {{@restaurant.user_rating.aggregate_rating}} / 5
+              </span>
+            </p>
+
+            <button class="btn btn-primary">See more</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}
