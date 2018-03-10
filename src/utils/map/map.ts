@@ -25,6 +25,8 @@ export function renderMap ({ maxZoom, map }): void {
   }).addTo(map);
 }
 
+// Function which populates a map with nearby restaurants
+// The restaurants are fetched using the zomato module
 export async function populateNearby (state, coords: Coordinates) {
   const result = await getNearby(coords);
   const { nearby_restaurants } = await result.json();
