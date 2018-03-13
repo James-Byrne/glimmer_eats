@@ -1,2 +1,12 @@
-<Navbar/>
-<GlimmerMap/>
+{{#if (eq currentRoute 'map')}}
+  <GlimmerMap/>
+{{else if (eq currentRoute 'restaurants-list')}}
+  list
+{{else if (eq currentRoute 'favourites')}}
+  favourites
+{{else if (eq currentRoute 'restaurant')}}
+  restaurant
+{{else}}
+  about
+{{/if}}
+<Navbar @currentRoute={{currentRoute}} @setRoute={{action setRoute}}   />

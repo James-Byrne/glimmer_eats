@@ -22,3 +22,17 @@
 }
 .preview-content { padding: 10px; }
 .ratings > .fa-star { color: yellow; }
+
+/* Navbar Component */
+.glimmer-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #3A3D3D;
+  color: white;
+  font-size: 1.5rem;
+}
+.selected {
+  color: #61C0A2;
+}
