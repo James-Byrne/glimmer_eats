@@ -8,43 +8,36 @@ const Env = {
   attribution: '',
   accessToken: 'pk.eyJ1IjoiamFtZXNkZXNieXJuZSIsImEiOiJjamR5dG5qODQxM3VtMzNxcDU1dXdrdmJ3In0.hJM4sfiAwMEC2bndm5JXIg',
   leafletUrl: 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
+  maxZoom: 17,
+  startingZoom: 14,
 };
 
-// Create a map instance on the state object passed in
-export function createMap(state, element: Element): void {
-  state.map = L.map(element).setView([state.latitude, state.longitude], state.startingZoom);
+// Return a map instance with the view set on a lat/lon
+// passed in
+export function getMapInstance(e: Element, lat: number = 53.35, lon :number = -6.27): any {
+  return L.map(e).setView([lat, lon], Env.startingZoom);
 }
 
 // Render a map given a map object
-export function renderMap ({ maxZoom, map }): void {
-  L.tileLayer(Env.leafletUrl, {
+export function renderMap (map): any {
+  return L.tileLayer(Env.leafletUrl, {
     attribution: Env.attribution,
-    maxZoom: maxZoom,
+    maxZoom: Env.maxZoom,
     id: 'mapbox.streets',
     accessToken: Env.accessToken
   }).addTo(map);
 }
 
-// Function which populates a map with nearby restaurants
+// Function which gets a list of nearby restaurants
 // The restaurants are fetched using the zomato module
-export async function populateNearby (state, coords: Coordinates) {
+export async function getNearbyRestaurants(coords: Coordinates): Promise<Array<any>> {
   const result = await getNearby(coords);
   const { nearby_restaurants } = await result.json();
-
-  if (nearby_restaurants.length > 0) {
-    nearby_restaurants.forEach(r => addRestaurant(state, r.restaurant));
-  } else {
-    // inform the user no restaurants are nearby
-    console.log('Error, no restaurants nearby');
-  }
+  return nearby_restaurants;
 }
 
-// This function takes care of adding a restaurant to a map,
-// creating a popover and onClick event for the marker
-function addRestaurant ({ map, restaurantList, onSelect }, restaurant): void {
-  if (!restaurantList.includes(restaurant.R.res_id)) {
-    restaurantList.push(restaurant.R.res_id);
-    const { location: { latitude, longitude } } = restaurant;
-    L.marker([latitude, longitude]).on('click', () => onSelect(restaurant)).addTo(map);
-  }
+export function addRestaurantToMap(map: any, restaurant: any, onClick: Function): any {
+  const { location: { latitude, longitude } } = restaurant;
+  L.marker([latitude, longitude]).on('click', onClick).addTo(map);
+  return restaurant;
 }
