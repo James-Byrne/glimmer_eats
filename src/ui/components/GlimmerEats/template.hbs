@@ -1,7 +1,7 @@
 {{#if (eq currentRoute 'map')}}
-  <GlimmerMap/>
+  <GlimmerMap @restaurants={{restaurants}} @userLocation={{userLocation}} />
 {{else if (eq currentRoute 'restaurants-list')}}
-  list
+  <RestaurantsList @restaurantList={{restaurantList}} />
 {{else if (eq currentRoute 'favourites')}}
   favourites
 {{else if (eq currentRoute 'restaurant')}}
