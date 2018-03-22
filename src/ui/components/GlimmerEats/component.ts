@@ -7,13 +7,15 @@ export default class GlimmerEats extends Component {
   // The current route
   @tracked currentRoute: string = 'map';
   @tracked restaurants: any = {};
+  @tracked restaurant: any = {}; // TODO : add a restaurant interface
   @tracked userLocation: Coordinates = {
     longitude: -6.27,
     latitude: 53.35,
   };
 
-  setRoute(route) {
+  setRoute(route, restaurant = {}) {
     this.currentRoute = route;
+    this.restaurant = restaurant;
   }
 
   async didInsertElement() {
