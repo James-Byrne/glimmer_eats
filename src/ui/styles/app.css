@@ -15,7 +15,7 @@ body { background-color: #f2f3f5 !important; }
 .restaurant-preview {
   position: fixed;
   z-index: 1000;
-  bottom: 0;
+  bottom: 3rem;
 
   width: 100%;
 
@@ -40,3 +40,19 @@ body { background-color: #f2f3f5 !important; }
   font-size: 1.5rem;
 }
 .selected { color: #61C0A2; }
+
+/* Card Changes */
+.card-badge-row {
+  overflow: hidden;
+  max-height: 1.6rem;
+}
+.card-right-chevron {
+  position: absolute;
+  top: 3rem;
+  right: 1rem;;
+  color: #61C0A2;
+}
+
+.badge-secondary {
+  background-color: #61C0A2;
+}

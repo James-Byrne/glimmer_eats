@@ -1,24 +1,35 @@
-<div class="container restaurants-list">
+<div class="container restaurants-list pb-5 mb-5">
+  {{#each @restaurants key="@index" as |r|}}
 
-  <div class="row">
-    <div class="col">
-      <div class="card mt-3">
-        <div class="card-body">
-          This is some text within a card body.
+    <div class="row">
+      <div class="col">
+        <div class="card mt-3">
+
+          <div class="card-body">
+            <div class="row">
+
+              <div class="col-3">
+                <img src="{{r.thumb}}" alt="Restaurant Image" height="70" width="70" style="border-radius: 50px">
+              </div>
+
+              <div class="col pr-4">
+                <h5 class="card-title">{{r.name}}</h5>
+                <div class="card-badge-row">
+                  {{#each (split-on r.cuisines ",") key="@index" as |c|}}
+                    <span class="badge badge-pill badge-secondary">{{c}}</span>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+
+            <span class="card-right-chevron">
+              <i class="fas fa-chevron-right"></i>
+            </span>
+          </div>
+
         </div>
       </div>
     </div>
-  </div>
 
-
-  <div class="row">
-    <div class="col">
-      <div class="card mt-3">
-        <div class="card-body">
-          This is some text within a card body.
-        </div>
-      </div>
-    </div>
-  </div>
-
+  {{/each}}
 </div>
