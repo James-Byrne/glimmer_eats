@@ -1,12 +1,14 @@
 {{#if (eq currentRoute 'map')}}
   <GlimmerMap @restaurants={{restaurants}} @userLocation={{userLocation}} />
 {{else if (eq currentRoute 'restaurants-list')}}
-  <RestaurantsList @restaurants={{restaurants}} />
+  <RestaurantsList @restaurants={{restaurants}} @setRoute={{action setRoute "restaurant"}} />
 {{else if (eq currentRoute 'favourites')}}
   favourites
-{{else if (eq currentRoute 'restaurant')}}
-  restaurant
-{{else}}
+{{else if (and (eq currentRoute 'restaurant') restaurant.R.res_id)}}
+  <RestaurantView @restaurant={{restaurant}} />
+{{else if (eq currentRoute 'about')}}
   about
+{{else}}
+  how did you get here?
 {{/if}}
-<Navbar @currentRoute={{currentRoute}} @setRoute={{action setRoute}}   />
+<Navbar @currentRoute={{currentRoute}} @setRoute={{action setRoute}} />
