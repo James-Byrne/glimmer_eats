@@ -9,6 +9,7 @@ export default class GlimmerMap extends Component {
   @tracked existingMarkers = [];
   map = {};
 
+  // HERE BE DRAGONS!
   @tracked('args')
   get markers() {
     const map = this.map
@@ -23,17 +24,18 @@ export default class GlimmerMap extends Component {
 
     return '';
   }
+  // END OF THE DRAGONS *phew*
 
   get element(): HTMLElement {
     return this.bounds.firstNode as HTMLElement;
   }
 
-  setSelected(r) {
+  setSelected(r): Function {
     return () => this.selectedRestaurant = r;
   }
 
   // Create and render the map
-  async didInsertElement () {
+  didInsertElement () {
     const map = getMapInstance(this.element.querySelector('#map'));
     renderMap(map);
     this.map = map;
