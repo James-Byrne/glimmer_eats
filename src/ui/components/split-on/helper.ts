@@ -1,3 +1,3 @@
-export default function splitOn([list = [], splitCharacter = ""]) {
-  return list.length > 0 ? list.split(splitCharacter) : [];
+export default function splitOn([str = '', splitCharacter = '']) {
+  return str.length > 0 ? str.split(splitCharacter) : [];
 }
