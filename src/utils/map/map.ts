@@ -14,8 +14,8 @@ const Env = {
 
 // Return a map instance with the view set on a lat/lon
 // passed in
-export function getMapInstance(e: Element, lat: number = 53.35, lon :number = -6.27): any {
-  return L.map(e).setView([lat, lon], Env.startingZoom);
+export function getMapInstance(e: Element, lat: number = 53.35, lon: number = -6.27, opts = {}): any {
+  return L.map(e, opts).setView([lat, lon], Env.startingZoom);
 }
 
 // Render a map given a map object
