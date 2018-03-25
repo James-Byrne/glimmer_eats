@@ -1,1 +1,20 @@
-<div></div>
+<div class="container-fluid restaurant-view">
+  <div class="row">
+    <div class="col">
+
+      <div id="map" class="rv-map"></div>
+      <div style="height: 5rem">images</div>
+
+      <h2>{{@restaurant.name}}</h2>
+
+      <h2 class="text-primary">{{@restaurant.user_rating.aggregate_rating}}/5</h2>
+
+      {{#each (split-on @restaurant.cuisines ",") key="@index" as |c|}}
+        <span class="badge badge-pill badge-secondary">{{c}}</span>
+      {{/each}}
+
+      <button class="btn btn-primary">Favorite</button>
+
+    </div>
+  </div>
+</div>

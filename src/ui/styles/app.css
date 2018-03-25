@@ -56,3 +56,9 @@ body { background-color: #f2f3f5 !important; }
 .badge-secondary {
   background-color: #61C0A2;
 }
+
+/* RestaurantView Component */
+.rv-map {
+  margin: 0 -15px;
+  height: 10rem;
+}
