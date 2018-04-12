@@ -7,24 +7,7 @@ import { getUserLocation, setUserLocation } from '../../../utils/location/locati
 export default class GlimmerMap extends Component {
   @tracked selectedRestaurant = {};
   @tracked existingMarkers = [];
-  map = {};
-
-  // HERE BE DRAGONS!
-  @tracked('args')
-  get markers() {
-    const map = this.map
-    const r = this.args.restaurants;
-
-    Object.keys(r).forEach(k => {
-      if(!this.existingMarkers.includes(k)) {
-        addRestaurantToMap(map, r[k], this.setSelected(r[k]))
-        this.existingMarkers.push(k);
-      }
-    });
-
-    return '';
-  }
-  // END OF THE DRAGONS *phew*
+  map = null;
 
   get element(): HTMLElement {
     return this.bounds.firstNode as HTMLElement;
@@ -39,6 +22,25 @@ export default class GlimmerMap extends Component {
     const map = getMapInstance(this.element.querySelector('#map'));
     renderMap(map);
     this.map = map;
+    this.addMarkers();
+  }
+
+  didUpdate () {
+    this.addMarkers();
+  }
+
+  addMarkers() {
+    const map = this.map
+    const r = this.args.restaurants;
+
+    if (map) {
+      Object.keys(r).forEach(k => {
+        if(!this.existingMarkers.includes(k)) {
+          addRestaurantToMap(map, r[k], this.setSelected(r[k]))
+          this.existingMarkers.push(k);
+        }
+      });
+    }
   }
 
   //watchUserLocation () {
