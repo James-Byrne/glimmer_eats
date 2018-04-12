@@ -1,5 +1,4 @@
 <div class="glimmer-map">
   <div id="map"></div>
-  {{markers}}
 </div>
-<RestaurantPreview @restaurant={{selectedRestaurant}} />
+<RestaurantPreview @restaurant={{selectedRestaurant}} @setRoute={{action @setRoute}} />
