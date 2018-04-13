@@ -37,4 +37,12 @@ export default class GlimmerEats extends Component {
       }
     });
   }
+
+  updateRestaurant(restaurant) {
+    this.restaurant = restaurant;
+    this.restaurants = {
+      ...this.restaurants,
+      [restaurant.R.res_id]: restaurant,
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import Component from '@glimmer/component';
+import Component, {tracked } from '@glimmer/component';
 import L from 'leaflet';
 
 import { getMapInstance, renderMap, addRestaurantToMap } from '../../../utils/map/map';
@@ -23,5 +23,17 @@ export default class RestaurantView extends Component {
     addRestaurantToMap(map, restaurant, () => {});
 
     this.map = map;
+  }
+
+  @tracked('args')
+  get isFavourited() {
+    return this.args.restaurant.favourited;
+  }
+
+  toggleFavouriteRestaurant() {
+    this.args.updateRestaurant({
+      ...this.args.restaurant,
+      favourited: !this.args.restaurant.favourited,
+    });
   }
 }

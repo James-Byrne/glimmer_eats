@@ -5,7 +5,7 @@
 {{else if (eq currentRoute 'favourites')}}
   favourites
 {{else if (and (eq currentRoute 'restaurant') restaurant.R.res_id)}}
-  <RestaurantView @restaurant={{restaurant}} />
+  <RestaurantView @restaurant={{restaurant}} @updateRestaurant={{action updateRestaurant}} />
 {{else if (eq currentRoute 'about')}}
   about
 {{else}}

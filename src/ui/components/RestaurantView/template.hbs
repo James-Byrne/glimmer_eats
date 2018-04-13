@@ -3,18 +3,32 @@
     <div class="col">
 
       <div id="map" class="rv-map"></div>
-      <div style="height: 5rem">images</div>
 
-      <h2>{{@restaurant.name}}</h2>
+      <div class="row mt-4">
+        <div class="col-4">
+          <img src="{{@restaurant.thumb}}" alt="Restaurant Image"
+            class="circle" height="80" width="80">
+        </div>
+
+        <div class="col">
+          <h3 class="card-title">{{@restaurant.name}}</h3>
+          <div class="card-badge-row">
+            {{#each (split-on @restaurant.cuisines ",") key="@index" as |c|}}
+              <span class="badge badge-pill badge-primary">{{c}}</span>
+            {{/each}}
+          </div>
+        </div>
+      </div>
 
       <h2 class="text-primary">{{@restaurant.user_rating.aggregate_rating}}/5</h2>
-
-      {{#each (split-on @restaurant.cuisines ",") key="@index" as |c|}}
-        <span class="badge badge-pill badge-secondary">{{c}}</span>
-      {{/each}}
-
-      <button class="btn btn-primary">Favorite</button>
-
     </div>
   </div>
+
+  <button class="btn btn-fab btn-primary circle shadow" onclick={{action toggleFavouriteRestaurant}}>
+    {{#if (eq isFavourited true)}}
+      <i class="fas fa-star fa-2x"></i>
+    {{else}}
+      <i class="far fa-star fa-2x"></i>
+    {{/if}}
+  </button>
 </div>
