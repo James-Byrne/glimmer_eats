@@ -1,6 +1,9 @@
 /* General CSS */
 
-body { background-color: #f2f3f5 !important; }
+body {
+  min-height: 100vh;
+  background-color: #f2f3f5 !important;
+}
 
 .card { box-shadow: 2px 2px 8px 0 rgba(46,61,73,.2); }
 
