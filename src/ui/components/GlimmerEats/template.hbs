@@ -3,7 +3,22 @@
 {{else if (eq currentRoute 'restaurants-list')}}
   <RestaurantsList @restaurants={{restaurants}} @setRoute={{action setRoute "restaurant"}} />
 {{else if (eq currentRoute 'favourites')}}
-  <RestaurantsList @restaurants={{favouriteRestaurants}} @setRoute={{action setRoute "restaurant"}} />
+  {{#if (gt favouriteRestaurants.length)}}
+    <RestaurantsList @restaurants={{favouriteRestaurants}} @setRoute={{action setRoute "restaurant"}} />
+  {{else}}
+    <div class="container pt-5 mt-5">
+      <div class="row">
+        <div class="col text-center">
+          <h3 class="text-primary">
+            Your Favourites will show up here. Just keep an eye out for the favourite button!
+          </h3>
+          <button class="btn btn-fab btn-primary circle shadow mt-5">
+            <i class="far fa-star fa-2x"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 {{else if (and (eq currentRoute 'restaurant') restaurant.R.res_id)}}
   <RestaurantView @restaurant={{restaurant}} @updateRestaurant={{action updateRestaurant}} />
 {{else if (eq currentRoute 'about')}}
