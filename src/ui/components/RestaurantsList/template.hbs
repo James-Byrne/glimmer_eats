@@ -9,14 +9,14 @@
             <div class="row">
 
               <div class="col-3">
-                <img src="{{r.thumb}}" alt="Restaurant Image" height="70" width="70" style="border-radius: 50px">
+                <img src="{{r.thumb}}" alt="Restaurant Image" height="70" width="70" class="circle">
               </div>
 
               <div class="col pr-4">
                 <h5 class="card-title">{{r.name}}</h5>
                 <div class="card-badge-row">
                   {{#each (split-on r.cuisines ",") key="@index" as |c|}}
-                    <span class="badge badge-pill badge-secondary">{{c}}</span>
+                    <span class="badge badge-pill badge-primary">{{c}}</span>
                   {{/each}}
                 </div>
               </div>
