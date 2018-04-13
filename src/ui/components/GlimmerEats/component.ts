@@ -38,6 +38,16 @@ export default class GlimmerEats extends Component {
     });
   }
 
+  @tracked('restaurants')
+  get favouriteRestaurants() {
+    return (
+      Object
+      .keys(this.restaurants)
+      .filter(k => this.restaurants[k]['favourited'])
+      .map(k => this.restaurants[k])
+    );
+  }
+
   updateRestaurant(restaurant) {
     this.restaurant = restaurant;
     this.restaurants = {

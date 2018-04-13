@@ -3,7 +3,7 @@
 {{else if (eq currentRoute 'restaurants-list')}}
   <RestaurantsList @restaurants={{restaurants}} @setRoute={{action setRoute "restaurant"}} />
 {{else if (eq currentRoute 'favourites')}}
-  favourites
+  <RestaurantsList @restaurants={{favouriteRestaurants}} @setRoute={{action setRoute "restaurant"}} />
 {{else if (and (eq currentRoute 'restaurant') restaurant.R.res_id)}}
   <RestaurantView @restaurant={{restaurant}} @updateRestaurant={{action updateRestaurant}} />
 {{else if (eq currentRoute 'about')}}
