@@ -11,11 +11,9 @@
           <div class="preview-content">
             <h4 class="title">{{@restaurant.name}}</h4>
 
-            <p class="ratings">
+            <p>
               <i class="fas fa-star"></i>
-              <span style="color: #{{@restaurant.user_rating.rating_color}}">
-                {{@restaurant.user_rating.aggregate_rating}} / 5
-              </span>
+              {{@restaurant.user_rating.aggregate_rating}} / 5
             </p>
 
             <button class="btn btn-primary" onclick={{action @setRoute @restaurant}}>See more</button>
