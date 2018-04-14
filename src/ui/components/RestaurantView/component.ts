@@ -6,6 +6,7 @@ import { setUserLocation } from '../../../utils/location/location';
 
 export default class RestaurantView extends Component {
   map = {};
+  warningText = 'Warning this will bring you to another site from which you can never return!!! But there will also be useful information and whatever ...';
 
   get element(): HTMLElement {
     return this.bounds.firstNode as HTMLElement;
@@ -35,5 +36,11 @@ export default class RestaurantView extends Component {
       ...this.args.restaurant,
       favourited: !this.args.restaurant.favourited,
     });
+  }
+
+  openMenu(restaurant) {
+    if (confirm(this.warningText)) {
+      window.location = restaurant.menu_url;
+    }
   }
 }
