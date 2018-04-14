@@ -3,7 +3,7 @@
 {{else if (eq currentRoute 'restaurants-list')}}
   <RestaurantsList @restaurants={{restaurants}} @setRoute={{action setRoute "restaurant"}} />
 {{else if (eq currentRoute 'favourites')}}
-  {{#if (gt favouriteRestaurants.length)}}
+  {{#if (gt favouriteRestaurants.length 0)}}
     <RestaurantsList @restaurants={{favouriteRestaurants}} @setRoute={{action setRoute "restaurant"}} />
   {{else}}
     <div class="container pt-5 mt-5">
