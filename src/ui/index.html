@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hello Glimmer</title>
-    <meta name="description" content="">
+    <title>Glimmer Eats | Glimmer PWA</title>
+    <meta name="description" content="An example PWA built with glimmer.js">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <meta name="description" content="">
+
+    <link rel="prefetch" href="/sw.js">
+    <link rel="prefetch" href="/assets/glimmer-eats-icon.png">
+    <link rel="prefetch" href="/glimmer-splash.png">
+
+     <!-- Web Application Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <!-- Chrome for Android theme color -->
+    <link rel="shortcut icon" sizes="48x48" type="image/png" href="/glimmer-splash.png"/>
+    <meta name="theme-color" content="#3A3D3D">
 
     {{content-for "head"}}
 
@@ -14,14 +29,23 @@
       crossorigin=""/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <link rel="stylesheet" href="{{rootURL}}app.css">
+
+    {{content-for 'critical-css'}}
 
     {{content-for "head-footer"}}
+
   </head>
   <body>
     {{content-for "body"}}
 
     <div id="app"></div>
+
+    <noscript>
+      <h3 style="text-align:center; font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica; color: white; padding-top: 4rem;">
+        Sorry, JavaScript needs to be enabled in order to run this application.
+      </h3>
+    </noscript>
+
     <script src="{{rootURL}}app.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

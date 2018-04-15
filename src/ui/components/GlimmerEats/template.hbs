@@ -1,5 +1,21 @@
 {{#if (eq currentRoute 'map')}}
+  {{#if mapsEnabled}}
   <GlimmerMap @restaurants={{restaurants}} @userLocation={{userLocation}} @setRoute={{action setRoute "restaurant"}} />
+  {{else}}
+    <div class="container pt-5 mt-5">
+      <div class="row">
+        <div class="col text-center">
+          <i class="fas fa-map-signs fa-3x text-primary"></i>
+          <br/>
+          <br/>
+          <br/>
+          <h4 class="text-primary">
+            Maps are disabled while offline. But the rest of the site should work just fine!
+          </h4>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 {{else if (eq currentRoute 'restaurants-list')}}
   <RestaurantsList @restaurants={{restaurants}} @setRoute={{action setRoute "restaurant"}} />
 {{else if (eq currentRoute 'favourites')}}
@@ -12,7 +28,7 @@
           <h3 class="text-primary">
             Your Favourites will show up here. Just keep an eye out for the favourite button!
           </h3>
-          <button class="btn btn-fab btn-primary circle shadow mt-5">
+          <button class="btn btn-fab btn-primary circle mt-5">
             <i class="far fa-star fa-2x"></i>
           </button>
         </div>
@@ -24,6 +40,6 @@
 {{else if (eq currentRoute 'about')}}
   about
 {{else}}
-  how did you get here?
+  <h4 class="text-light text-center pt-5 mt-5">how did you get here?</h4>
 {{/if}}
 <Navbar @currentRoute={{currentRoute}} @setRoute={{action setRoute}} />
