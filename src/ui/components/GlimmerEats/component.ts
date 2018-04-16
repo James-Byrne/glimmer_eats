@@ -2,6 +2,7 @@ import Component, { tracked } from '@glimmer/component';
 import { Coordinates } from '../../../utils/types';
 import { getNearbyRestaurants, addRestaurantToMap } from '../../../utils/map/map';
 import { getUserLocation, setUserLocation } from '../../../utils/location/location';
+import { addFavourite, removeFavourite, getFavouritedRestaurants } from '../../../utils/localstorage';
 
 export default class GlimmerEats extends Component {
   // The current route
@@ -46,14 +47,16 @@ export default class GlimmerEats extends Component {
     // setUserLocation(map, p.coords);
 
     // Populate the nearby restaurants
-    const nearbyRestaurants = await getNearbyRestaurants(this.userLocation);
+    let nearbyRestaurants = await getNearbyRestaurants(this.userLocation);
 
-    nearbyRestaurants.forEach(({ restaurant }) =>  {
-      this.restaurants = {
-        ...this.restaurants,
-        [restaurant.R.res_id]: restaurant
-      }
-    });
+    nearbyRestaurants = nearbyRestaurants
+      .reduce((acc, { restaurant }) => ({ ...acc, [restaurant.R.res_id]: restaurant }), {});
+
+    this.restaurants = {
+      ...this.restaurants,
+      ...nearbyRestaurants,
+      ...getFavouritedRestaurants(),
+    }
   }
 
   setRoute(route, restaurant = {}) {
@@ -67,6 +70,13 @@ export default class GlimmerEats extends Component {
 
   updateRestaurant(restaurant) {
     this.restaurant = restaurant;
+
+    if (restaurant.favourited) {
+      addFavourite(restaurant);
+    } else {
+      removeFavourite(restaurant);
+    }
+
     this.restaurants = {
       ...this.restaurants,
       [restaurant.R.res_id]: restaurant,

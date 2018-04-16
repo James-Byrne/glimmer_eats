@@ -20,6 +20,9 @@ body {
   border-color: #61C0A2 !important;
   background-color: #61C0A2 !important;
 }
+.btn-primary.focus, .btn-primary:focus {
+  box-shadow: none !important;
+}
 .btn-fab {
   height: 4rem;
   width: 4rem;
