@@ -7,6 +7,7 @@ import { getUserLocation, setUserLocation } from '../../../utils/location/locati
 export default class GlimmerMap extends Component {
   @tracked selectedRestaurant = {};
   @tracked existingMarkers = [];
+  @tracked isLoading = false;
   map = null;
 
   get element(): HTMLElement {
@@ -15,6 +16,10 @@ export default class GlimmerMap extends Component {
 
   setSelected(r): Function {
     return () => this.selectedRestaurant = r;
+  }
+
+  removeSelected(r): void {
+    this.selectedRestaurant = {};
   }
 
   // Create and render the map
@@ -27,6 +32,25 @@ export default class GlimmerMap extends Component {
 
   didUpdate () {
     this.addMarkers();
+  }
+
+  async getUserLocation() {
+    // set the loading icon going
+    this.toggleLoading();
+
+    try {
+      // Get the users location and update the map
+      const p: Position = await getUserLocation();
+      setUserLocation(this.map, p.coords);
+      this.args.updateUserLocation(p.coords);
+    } catch (e) {}
+
+    // Stop the loading icon
+    this.toggleLoading();
+  }
+
+  toggleLoading() {
+    this.isLoading = !this.isLoading;
   }
 
   addMarkers() {

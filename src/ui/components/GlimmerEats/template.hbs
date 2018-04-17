@@ -1,6 +1,10 @@
 {{#if (eq currentRoute 'map')}}
   {{#if mapsEnabled}}
-  <GlimmerMap @restaurants={{restaurants}} @userLocation={{userLocation}} @setRoute={{action setRoute "restaurant"}} />
+    <GlimmerMap
+      @restaurants={{restaurants}}
+      @userLocation={{userLocation}}
+      @setRoute={{action setRoute "restaurant"}}
+      @updateUserLocation={{action updateUserLocation}} />
   {{else}}
     <div class="container pt-5 mt-5">
       <div class="row">

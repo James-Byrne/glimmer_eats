@@ -8,7 +8,7 @@ export default class GlimmerEats extends Component {
   // The current route
   @tracked currentRoute: string = 'map';
   @tracked restaurants: any = {};
-  @tracked restaurant: any = {}; // TODO : add a restaurant interface
+  @tracked restaurant: any = {};
   @tracked mapsEnabled: boolean = true;
   @tracked userLocation: Coordinates = {
     longitude: -6.27,
@@ -37,7 +37,7 @@ export default class GlimmerEats extends Component {
     }
   }
 
-  async didInsertElement() {
+  didInsertElement() {
     // Get the users location and update the map
     // TODO: add a loading icon here
     // const p: Position = await getUserLocation();
@@ -47,7 +47,11 @@ export default class GlimmerEats extends Component {
     // setUserLocation(map, p.coords);
 
     // Populate the nearby restaurants
-    let nearbyRestaurants = await getNearbyRestaurants(this.userLocation);
+    this.populateNearby();
+  }
+
+  async populateNearby(userLocation = this.userLocation) {
+    let nearbyRestaurants = await getNearbyRestaurants(userLocation);
 
     nearbyRestaurants = nearbyRestaurants
       .reduce((acc, { restaurant }) => ({ ...acc, [restaurant.R.res_id]: restaurant }), {});
@@ -56,7 +60,7 @@ export default class GlimmerEats extends Component {
       ...this.restaurants,
       ...nearbyRestaurants,
       ...getFavouritedRestaurants(),
-    }
+    };
   }
 
   setRoute(route, restaurant = {}) {
@@ -81,5 +85,10 @@ export default class GlimmerEats extends Component {
       ...this.restaurants,
       [restaurant.R.res_id]: restaurant,
     }
+  }
+
+  updateUserLocation(userLocation) {
+    this.userLocation = { ...userLocation };
+    this.populateNearby(userLocation);
   }
 }

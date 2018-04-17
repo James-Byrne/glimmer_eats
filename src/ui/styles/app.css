@@ -26,6 +26,16 @@ body {
 .btn-fab {
   height: 4rem;
   width: 4rem;
+  z-index: 999;
+}
+.btn-fab-sm {
+  height: 2rem;
+  width: 2rem;
+  z-index: 999;
+}
+.btn-transparent {
+  background-color: transparent;
+  border: none;
 }
 
 .position-bottom-right {
@@ -33,6 +43,12 @@ body {
   bottom: 100px;
   right: 15px;
 }
+.position-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 
 .badge-primary { background-color: #61C0A2 !important; }
 

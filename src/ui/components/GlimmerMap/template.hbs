@@ -1,4 +1,17 @@
 <div class="glimmer-map">
   <div id="map"></div>
+
+  <button
+    class="btn btn-fab btn-primary circle position-bottom-right"
+    onclick={{action getUserLocation}}>
+    {{#if (eq isLoading true)}}
+      <i class="fas fa-spinner fa-spin fa-2x"></i>
+    {{else}}
+      <i class="far fa-compass fa-2x"></i>
+    {{/if}}
+  </button>
 </div>
-<RestaurantPreview @restaurant={{selectedRestaurant}} @setRoute={{action @setRoute}} />
+<RestaurantPreview
+  @restaurant={{selectedRestaurant}}
+  @removeSelected={{action removeSelected}}
+  @setRoute={{action @setRoute}} />
