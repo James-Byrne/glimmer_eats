@@ -42,7 +42,7 @@
 {{else if (and (eq currentRoute 'restaurant') restaurant.R.res_id)}}
   <RestaurantView @restaurant={{restaurant}} @updateRestaurant={{action updateRestaurant}} />
 {{else if (eq currentRoute 'about')}}
-  about
+  <About />
 {{else}}
   <h4 class="text-light text-center pt-5 mt-5">how did you get here?</h4>
 {{/if}}
