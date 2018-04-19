@@ -1,0 +1,132 @@
+/* General CSS */
+
+body {
+  min-height: 100vh;
+  background-color: #3A3D3D !important;
+}
+
+.card { box-shadow: 2px 2px 8px 0 rgba(46,61,73,.2); }
+
+.circle { border-radius: 50% !important; }
+
+.shadow {
+  box-shadow: 0px 1px 4px 2px rgba(119, 119, 119, 0.75);
+  -moz-box-shadow: 0px 1px 4px 2px rgba(119, 119, 119, 0.75);
+  -webkit-box-shadow: 0px 1px 4px 2px rgba(119, 119, 119, 0.75);
+}
+
+.text-primary { color: #61C0A2 !important; }
+.btn-primary {
+  border-color: #61C0A2 !important;
+  background-color: #61C0A2 !important;
+}
+.btn-primary.focus, .btn-primary:focus {
+  box-shadow: none !important;
+}
+.btn-fab {
+  height: 4rem;
+  width: 4rem;
+  z-index: 999;
+}
+.btn-fab-sm {
+  height: 2rem;
+  width: 2rem;
+  z-index: 999;
+}
+.btn-transparent {
+  background-color: transparent;
+  border: none;
+}
+
+.position-bottom-right {
+  position: absolute;
+  bottom: 100px;
+  right: 15px;
+}
+.position-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+
+.badge-primary { background-color: #61C0A2 !important; }
+
+/* GlimmerMap Component */
+.glimmer-map { height: 100vh; }
+.glimmer-map > #map {
+  height: 100%;
+  width: 100%;
+}
+
+/* RestaurantPreview Component */
+.restaurant-preview {
+  position: fixed;
+  z-index: 1000;
+  bottom: 4rem;
+
+  width: 100%;
+
+  color: white;
+  background-color: #3A3D3D;
+}
+.preview-thumbnail {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+}
+.preview-content { padding: 10px; }
+
+/* Navbar Component */
+.glimmer-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #3A3D3D;
+  color: white;
+  font-size: 1.5rem;
+}
+.selected { color: #61C0A2; }
+
+/* Card Changes */
+.card-badge-row {
+  overflow: hidden;
+  max-height: 1.6rem;
+}
+.card-right-chevron {
+  position: absolute;
+  top: 3rem;
+  right: 1rem;;
+  color: #61C0A2;
+}
+
+.badge-secondary {
+  background-color: #61C0A2;
+}
+
+/* RestaurantView Component */
+.rv-map {
+  margin: 0 -15px;
+  height: 30vh;
+}
+
+/* About page */
+.text-orange {
+  color: #F5835F;
+}
+
+.glimmer-logo:before {
+  background-color: #F5835F;
+  background-image: url(/glimmer-logo-5153f9bb9b1b1b1c0944900cf072e514.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2rem;
+  border-radius: 50%;
+  content: '';
+  display: inline-block;
+  height: 2.75rem;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+  width: 2.75rem;
+}

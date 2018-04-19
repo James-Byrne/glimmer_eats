@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Glimmer Eats | Glimmer PWA</title>
+    <meta name="description" content="An example PWA built with glimmer.js">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+
+    <link rel="prefetch" href="/sw.js">
+    <link rel="prefetch" href="/assets/glimmer-eats-icon-f14de28324f40c0ef412c663e8a70fb8.png">
+    <link rel="prefetch" href="/assets/glimmer-192x192-4bf7f0d4df2ab92104594a41588a21c2.png">
+    <link rel="prefetch" href="/glimmer-512x512-287ec1eb23beaa19e728ac13f3a2717b.png">
+
+    <!-- Apple Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="/assets/glimmer-192x192-4bf7f0d4df2ab92104594a41588a21c2.png">
+
+     <!-- Web Application Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <!-- Chrome for Android theme color -->
+    <link rel="shortcut icon" sizes="48x48" type="image/png" href="/assets/glimmer-192x192-4bf7f0d4df2ab92104594a41588a21c2.png"/>
+    <meta name="theme-color" content="#3A3D3D">
+
+    
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+      integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+      crossorigin=""/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+    <style>
+/* General CSS */
+
+body {
+  min-height: 100vh;
+  background-color: #3A3D3D !important;
+}
+
+.card { box-shadow: 2px 2px 8px 0 rgba(46,61,73,.2); }
+
+.circle { border-radius: 50% !important; }
+
+.shadow {
+  box-shadow: 0px 1px 4px 2px rgba(119, 119, 119, 0.75);
+  -moz-box-shadow: 0px 1px 4px 2px rgba(119, 119, 119, 0.75);
+  -webkit-box-shadow: 0px 1px 4px 2px rgba(119, 119, 119, 0.75);
+}
+
+.text-primary { color: #61C0A2 !important; }
+.btn-primary {
+  border-color: #61C0A2 !important;
+  background-color: #61C0A2 !important;
+}
+.btn-primary.focus, .btn-primary:focus {
+  box-shadow: none !important;
+}
+.btn-fab {
+  height: 4rem;
+  width: 4rem;
+  z-index: 999;
+}
+.btn-fab-sm {
+  height: 2rem;
+  width: 2rem;
+  z-index: 999;
+}
+.btn-transparent {
+  background-color: transparent;
+  border: none;
+}
+
+.position-bottom-right {
+  position: absolute;
+  bottom: 100px;
+  right: 15px;
+}
+.position-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+
+.badge-primary { background-color: #61C0A2 !important; }
+
+/* GlimmerMap Component */
+.glimmer-map { height: 100vh; }
+.glimmer-map > #map {
+  height: 100%;
+  width: 100%;
+}
+
+/* RestaurantPreview Component */
+.restaurant-preview {
+  position: fixed;
+  z-index: 1000;
+  bottom: 4rem;
+
+  width: 100%;
+
+  color: white;
+  background-color: #3A3D3D;
+}
+.preview-thumbnail {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+}
+.preview-content { padding: 10px; }
+
+/* Navbar Component */
+.glimmer-navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #3A3D3D;
+  color: white;
+  font-size: 1.5rem;
+}
+.selected { color: #61C0A2; }
+
+/* Card Changes */
+.card-badge-row {
+  overflow: hidden;
+  max-height: 1.6rem;
+}
+.card-right-chevron {
+  position: absolute;
+  top: 3rem;
+  right: 1rem;;
+  color: #61C0A2;
+}
+
+.badge-secondary {
+  background-color: #61C0A2;
+}
+
+/* RestaurantView Component */
+.rv-map {
+  margin: 0 -15px;
+  height: 30vh;
+}
+
+/* About page */
+.text-orange {
+  color: #F5835F;
+}
+
+.glimmer-logo:before {
+  background-color: #F5835F;
+  background-image: url(/glimmer-logo-5153f9bb9b1b1b1c0944900cf072e514.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 2rem;
+  border-radius: 50%;
+  content: '';
+  display: inline-block;
+  height: 2.75rem;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+  width: 2.75rem;
+}
+
+</style>
+
+    
+
+  </head>
+  <body>
+    
+
+    <div id="app"></div>
+
+    <noscript>
+      <h3 style="text-align:center; font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica; color: white; padding-top: 4rem;">
+        Sorry, JavaScript needs to be enabled in order to run this application.
+      </h3>
+    </noscript>
+
+    <script src="app-b03f45a6541d9cfc54964373caf0b3a6.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="/sw-registration-96562d3f04aac78eb85b38ec252eac9a.js"></script>
+  </body>
+</html>
