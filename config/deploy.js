@@ -10,7 +10,8 @@ module.exports = function(deployTarget) {
   ENV.git = {
     repo: 'git@github.com:james-byrne/glimmer_eats.git',
     branch: 'gh-pages',
-    worktreePath: '/tmp/deploy'
+    worktreePath: '/tmp/deploy',
+    commitMessage: 'Deployed %@'
   };
 
   if (deployTarget === 'development') {
