@@ -38,29 +38,35 @@ export default class GlimmerEats extends Component {
   }
 
   didInsertElement() {
-    // Get the users location and update the map
-    // TODO: add a loading icon here
-    // const p: Position = await getUserLocation();
-
-    // TODO: set the userLocation above and pass it to the
-    // GlimmerMap param
-    // setUserLocation(map, p.coords);
-
     // Populate the nearby restaurants
-    this.populateNearby();
+    this.populateRestaurants();
   }
 
-  async populateNearby(userLocation = this.userLocation) {
-    let nearbyRestaurants = await getNearbyRestaurants(userLocation);
+  async populateRestaurants(userLocation = this.userLocation, opts = {}) {
+    // Extract the variables we need from the zamato query
+    let {
+      restaurants,
+      results_shown,
+      results_found,
+      results_start,
+    } = await getNearbyRestaurants(userLocation, opts);
 
-    nearbyRestaurants = nearbyRestaurants
+    // Add all of the restaurants we found to the map
+    restaurants = restaurants
       .reduce((acc, { restaurant }) => ({ ...acc, [restaurant.R.res_id]: restaurant }), {});
 
     this.restaurants = {
       ...this.restaurants,
-      ...nearbyRestaurants,
+      ...restaurants,
       ...getFavouritedRestaurants(),
     };
+
+    // If there wehere more results than what we got
+    // we will go fetch up to three more sets of
+    // restaurants for the area we are in
+    if ((results_shown < results_found) && (results_start < (results_shown * 3))) {
+      this.populateRestaurants(this.userLocation, { results_start: (results_start + results_shown) });
+    }
   }
 
   setRoute(route, restaurant = {}) {
@@ -89,6 +95,6 @@ export default class GlimmerEats extends Component {
 
   updateUserLocation(userLocation) {
     this.userLocation = { ...userLocation };
-    this.populateNearby(userLocation);
+    this.populateRestaurants(userLocation);
   }
 }

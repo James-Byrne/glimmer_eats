@@ -21,7 +21,8 @@ export function getNearby(geoLocation: Coordinates) {
   return fetch(url, zomatoRequestOtps);
 }
 
-export function getAllRestaurants() {
-  const url = `${zomatoUrl}/search?entity_id=91&entity_type=city`;
+export function getAllRestaurants(geoLocation: Coordinates, { results_start = "" }): Promise<Object<any>> {
+  const {latitude = 53.35, longitude = -6.27} = geoLocation;
+  const url = `${zomatoUrl}/search?entity_id=91&entity_type=city&lat=${latitude}&lon=${longitude}&start=${results_start}`;
   return fetch(url, zomatoRequestOtps);
 }

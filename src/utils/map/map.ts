@@ -1,6 +1,6 @@
 // This module manages all functionality on maps
 import L from 'leaflet';
-import { getNearby } from '../zomato/zomato';
+import { getNearby, getAllRestaurants } from '../zomato/zomato';
 import { Coordinates } from '../types';
 
 // move to env when this is fixed https://github.com/glimmerjs/glimmer-application-pipeline/issues/89
@@ -30,10 +30,9 @@ export function renderMap (map): any {
 
 // Function which gets a list of nearby restaurants
 // The restaurants are fetched using the zomato module
-export async function getNearbyRestaurants(coords: Coordinates): Promise<Array<any>> {
-  const result = await getNearby(coords);
-  const { nearby_restaurants } = await result.json();
-  return nearby_restaurants;
+export async function getNearbyRestaurants(coords: Coordinates, opts = {}): Promise<Object<any>> {
+  const result = await getAllRestaurants(coords, opts);
+  return await result.json();
 }
 
 export function addRestaurantToMap(map: any, restaurant: any, onClick: Function): any {
