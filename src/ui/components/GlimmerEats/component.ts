@@ -1,6 +1,6 @@
 import Component, { tracked } from '@glimmer/component';
 import { Coordinates } from '../../../utils/types';
-import { getNearbyRestaurants, addRestaurantToMap } from '../../../utils/map/map';
+import { getNearbyRestaurants, getDublinRestaurants } from '../../../utils/map/map';
 import { getUserLocation, setUserLocation } from '../../../utils/location/location';
 import { addFavourite, removeFavourite, getFavouritedRestaurants } from '../../../utils/localstorage';
 
@@ -49,9 +49,26 @@ export default class GlimmerEats extends Component {
       results_shown,
       results_found,
       results_start,
-    } = await getNearbyRestaurants(userLocation, opts);
+    } = await getDublinRestaurants(userLocation, opts);
 
-    // Add all of the restaurants we found to the map
+    // Add restaurants to the map
+    this.addRestaurantsToMap(restaurants);
+
+    // If there wehere more results than what we got
+    // we will go fetch up to three more sets of
+    // restaurants for the area we are in
+    if ((results_shown < results_found) && (results_start < (results_shown * 3))) {
+      this.populateRestaurants(this.userLocation, { results_start: (results_start + results_shown) });
+    }
+  }
+
+  async populateNearbyRestaurants(userLocation = this.userLocation) {
+    let { nearby_restaurants } = await getNearbyRestaurants(userLocation);
+    this.addRestaurantsToMap(nearby_restaurants);
+  }
+
+  // Add restaurants to the map
+  addRestaurantsToMap(restaurants) {
     restaurants = restaurants
       .reduce((acc, { restaurant }) => ({ ...acc, [restaurant.R.res_id]: restaurant }), {});
 
@@ -60,13 +77,6 @@ export default class GlimmerEats extends Component {
       ...restaurants,
       ...getFavouritedRestaurants(),
     };
-
-    // If there wehere more results than what we got
-    // we will go fetch up to three more sets of
-    // restaurants for the area we are in
-    if ((results_shown < results_found) && (results_start < (results_shown * 3))) {
-      this.populateRestaurants(this.userLocation, { results_start: (results_start + results_shown) });
-    }
   }
 
   setRoute(route, restaurant = {}) {

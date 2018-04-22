@@ -24,8 +24,7 @@ export default class GlimmerMap extends Component {
 
   // Create and render the map
   didInsertElement () {
-    const map = getMapInstance(this.element.querySelector('#map'));
-    renderMap(map);
+    const map = getMapInstance(this.element.querySelector('#map')); renderMap(map);
     this.map = map;
     this.addMarkers();
   }
@@ -66,12 +65,4 @@ export default class GlimmerMap extends Component {
       });
     }
   }
-
-  //watchUserLocation () {
-  //  const state = this.state;
-  //  state.map.addEventListener('moveend', () => {
-  //    const { lat, lng } = state.map.getCenter();
-  //    populateNearby(state, {latitude: lat, longitude: lng});
-  //  });
-  //}
 }

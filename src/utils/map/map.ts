@@ -28,10 +28,17 @@ export function renderMap (map): any {
   }).addTo(map);
 }
 
+// Function which retrieves a list of restaurants for
+// a given area, in this case dublin city center
+export async function getDublinRestaurants(coords: Coordinates, opts = {}): Promise<Object<any>> {
+  const result = await getAllRestaurants(coords, opts);
+  return await result.json();
+}
+
 // Function which gets a list of nearby restaurants
 // The restaurants are fetched using the zomato module
-export async function getNearbyRestaurants(coords: Coordinates, opts = {}): Promise<Object<any>> {
-  const result = await getAllRestaurants(coords, opts);
+export async function getNearbyRestaurants(coords: Coordinates): Promise<Array<any>> {
+  const result = await getNearby(coords);
   return await result.json();
 }
 
